@@ -1,0 +1,30 @@
+classDiagram
+  class Notification {
+    UUID id
+    UUID userId
+    NotificationType type
+    String title
+    String message
+    String payload
+    boolean read
+    Instant createdAt
+  }
+  class DeliveryLog {
+    UUID id
+    Channel channel
+    DeliveryStatus status
+    Instant sentAt
+  }
+  class NotificationType {
+    <<enumeration>>
+    WELCOME
+    DEBT_CREATED
+    DEBT_PAID
+    PAYMENT_FAILED
+    RECURRING_CREATED
+    GOAL_REACHED
+    FRAUD_ALERT
+    KYC_RESULT
+  }
+  Notification "1" --> "*" DeliveryLog
+  Notification --> NotificationType

@@ -1,0 +1,16 @@
+sequenceDiagram
+  participant WA as wallet-service
+  participant MQ as RabbitMQ
+  participant SA as savings-service
+  participant NO as notification-service
+  WA--)MQ: publie wallet.debited {PURCHASE, 3,40 €, eventId}
+  MQ--)SA: consomme wallet.debited
+  SA->>SA: déjà traité (eventId) ? sinon arrondi 4 € − 3,40 € = 0,60 €
+  SA->>WA: POST /api/wallets/transfers {0,60 €, type ROUNDUP} (OpenFeign)
+  WA-->>SA: 200
+  SA->>SA: balance +0,60 € et objectif mis à jour
+  SA--)MQ: publie roundup.saved
+  opt objectif atteint
+    SA--)MQ: publie goal.reached
+    MQ--)NO: "Objectif atteint !"
+  end

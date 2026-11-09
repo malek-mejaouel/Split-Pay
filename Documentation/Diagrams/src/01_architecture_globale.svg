@@ -1,0 +1,272 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 920" width="1600" height="920" font-family="DejaVu Sans Condensed, Arial, sans-serif">
+<defs>
+<marker id="mr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#E04A2F"/></marker>
+<marker id="mb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1C74C9"/></marker>
+<marker id="mg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2E8B3A"/></marker>
+<marker id="mk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#222"/></marker>
+</defs>
+<rect width="1600" height="920" fill="#FFFFFF"/>
+<text x="1000" y="38" font-size="30" font-weight="700" text-anchor="middle" fill="#111" font-family="DejaVu Serif, Times New Roman, serif">Vue d’ensemble de l’architecture SplitPay</text>
+<text x="102" y="34" font-size="13" font-weight="700" fill="#222" text-anchor="middle" >Réseau public</text>
+<text x="275" y="34" font-size="13" font-weight="700" fill="#222" text-anchor="start" >Réseau privé</text>
+<rect x="40" y="60" width="125" height="630" rx="4" fill="none" stroke="#333" stroke-width="1.3" stroke-dasharray="6 4"/>
+<rect x="50" y="110" width="105" height="104" rx="8" fill="#fff" stroke="#BBB"/>
+<polygon points="102,122 118,128 116,148 102,156 88,148 86,128" fill="#DD0031"/>
+<text x="102" y="147" font-size="17" font-weight="700" fill="#fff" text-anchor="middle" >A</text>
+<text x="102" y="176" font-size="11.5" font-weight="700" fill="#222" text-anchor="middle" >Application web</text>
+<text x="102" y="191" font-size="10" font-weight="400" fill="#555" text-anchor="middle" >Angular · étudiant</text>
+<rect x="50" y="240" width="105" height="104" rx="8" fill="#fff" stroke="#BBB"/>
+<polygon points="102,252 118,258 116,278 102,286 88,278 86,258" fill="#DD0031"/>
+<text x="102" y="277" font-size="17" font-weight="700" fill="#fff" text-anchor="middle" >A</text>
+<text x="102" y="306" font-size="11.5" font-weight="700" fill="#222" text-anchor="middle" >Espace admin</text>
+<text x="102" y="321" font-size="10" font-weight="400" fill="#555" text-anchor="middle" >Angular · alertes SSE</text>
+<text x="102" y="440" font-size="11" font-weight="400" fill="#444" text-anchor="middle" >Chaque appel passe</text>
+<text x="102" y="454" font-size="11" font-weight="400" fill="#444" text-anchor="middle" >par la gateway avec</text>
+<text x="102" y="468" font-size="11" font-weight="400" fill="#444" text-anchor="middle" >un <tspan font-weight="700">Bearer JWT</tspan></text>
+<rect x="52" y="635" width="100" height="30" rx="6" fill="#7BA7E0"/>
+<text x="102" y="655" font-size="12" font-weight="700" fill="#fff" text-anchor="middle" >Côté client</text>
+<rect x="185" y="60" width="60" height="630" rx="5" fill="#1E9BD7"/>
+<circle cx="215" cy="92" r="17" fill="#fff"/><circle cx="215" cy="92" r="12" fill="#6DB33F"/><path d="M209 98 Q209 84 222 85 Q221 97 209 98Z" fill="#fff"/>
+<text transform="translate(212,390) rotate(-90)" font-size="25" font-weight="700" fill="#fff" text-anchor="middle">API Gateway</text>
+<text transform="translate(234,390) rotate(-90)" font-size="12" fill="#fff" text-anchor="middle">Spring Cloud Gateway · :8080</text>
+<rect x="262" y="44" width="1323" height="861" fill="none" stroke="#333" stroke-width="1.3"/>
+<rect x="282" y="70" width="890" height="635" rx="3" fill="none" stroke="#333" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="292" y="88" font-size="11.5" font-weight="400" fill="#222" text-anchor="start" ><tspan font-weight="700">Microservices métier</tspan> · un conteneur chacun (réseau Docker Compose <tspan font-style="italic">splitpay-net</tspan>)</text>
+<g transform="translate(1075,80)"><rect x="0" y="8" width="26" height="10" rx="2" fill="#2496ED"/><rect x="4" y="2" width="5" height="5" fill="#2496ED"/><rect x="11" y="2" width="5" height="5" fill="#2496ED"/><rect x="18" y="2" width="5" height="5" fill="#2496ED"/></g>
+<text x="1106" y="92" font-size="11" font-weight="400" fill="#2496ED" text-anchor="start" ><tspan font-weight="700">Docker</tspan></text>
+<text x="1106" y="104" font-size="11" font-weight="700" fill="#2496ED" text-anchor="start" >Compose</text>
+<line x1="245" y1="150" x2="598" y2="150" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="592" y="146" font-size="10" font-weight="400" fill="#E04A2F" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">/api/users/** → lb://ACCOUNT</text>
+<line x1="245" y1="224" x2="598" y2="224" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="592" y="220" font-size="10" font-weight="400" fill="#E04A2F" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">/api/wallets/** → lb://WALLET</text>
+<line x1="245" y1="298" x2="598" y2="298" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="592" y="294" font-size="10" font-weight="400" fill="#E04A2F" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">/api/expenses/** → lb://EXPENSE</text>
+<line x1="245" y1="372" x2="598" y2="372" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="592" y="368" font-size="10" font-weight="400" fill="#E04A2F" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">/api/debts/** → lb://SETTLEMENT</text>
+<line x1="245" y1="446" x2="598" y2="446" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="592" y="442" font-size="10" font-weight="400" fill="#E04A2F" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">/api/recurring/** → lb://RECURRING</text>
+<line x1="245" y1="520" x2="598" y2="520" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="592" y="516" font-size="10" font-weight="400" fill="#E04A2F" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">/api/savings/** → lb://SAVINGS</text>
+<line x1="245" y1="594" x2="598" y2="594" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="592" y="590" font-size="10" font-weight="400" fill="#E04A2F" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">/api/fraud/** → lb://FRAUD</text>
+<line x1="245" y1="668" x2="598" y2="668" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="592" y="664" font-size="10" font-weight="400" fill="#E04A2F" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">/api/notifications/** → lb://NOTIFICATION</text>
+<line x1="810" y1="152" x2="1090" y2="152" stroke="#2E8B3A" stroke-width="1.5" stroke-dasharray="6 4" marker-start="url(#mg)" marker-end="url(#mg)"/>
+<text x="1082" y="165" font-size="10" font-weight="400" fill="#2E8B3A" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">publie user.registered</text>
+<line x1="810" y1="226" x2="1090" y2="226" stroke="#2E8B3A" stroke-width="1.5" stroke-dasharray="6 4" marker-start="url(#mg)" marker-end="url(#mg)"/>
+<text x="1082" y="239" font-size="10" font-weight="400" fill="#2E8B3A" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">publie wallet.debited</text>
+<line x1="810" y1="300" x2="1090" y2="300" stroke="#2E8B3A" stroke-width="1.5" stroke-dasharray="6 4" marker-start="url(#mg)" marker-end="url(#mg)"/>
+<text x="1082" y="313" font-size="10" font-weight="400" fill="#2E8B3A" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">publie expense.created</text>
+<line x1="810" y1="374" x2="1090" y2="374" stroke="#2E8B3A" stroke-width="1.5" stroke-dasharray="6 4" marker-start="url(#mg)" marker-end="url(#mg)"/>
+<text x="1082" y="387" font-size="10" font-weight="400" fill="#2E8B3A" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">publie debt.settled</text>
+<line x1="810" y1="448" x2="1090" y2="448" stroke="#2E8B3A" stroke-width="1.5" stroke-dasharray="6 4" marker-start="url(#mg)" marker-end="url(#mg)"/>
+<text x="1082" y="461" font-size="10" font-weight="400" fill="#2E8B3A" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">consomme expense.created</text>
+<line x1="810" y1="522" x2="1090" y2="522" stroke="#2E8B3A" stroke-width="1.5" stroke-dasharray="6 4" marker-start="url(#mg)" marker-end="url(#mg)"/>
+<text x="1082" y="535" font-size="10" font-weight="400" fill="#2E8B3A" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">consomme wallet.debited</text>
+<line x1="810" y1="596" x2="1090" y2="596" stroke="#2E8B3A" stroke-width="1.5" stroke-dasharray="6 4" marker-start="url(#mg)" marker-end="url(#mg)"/>
+<text x="1082" y="609" font-size="10" font-weight="400" fill="#2E8B3A" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">consomme wallet.debited</text>
+<line x1="1090" y1="670" x2="810" y2="670" stroke="#2E8B3A" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mg)"/>
+<text x="1082" y="683" font-size="10" font-weight="400" fill="#2E8B3A" text-anchor="end" stroke="#FFFFFF" stroke-width="3" paint-order="stroke">consomme → notifier</text>
+<path d="M600 626 H290 V116 H599" fill="none" stroke="#1C74C9" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mb)"/>
+<circle cx="578" cy="626" r="8" fill="#1C74C9"/>
+<text x="578" y="630" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >7</text>
+<path d="M600 552 H302 V121 H599" fill="none" stroke="#1C74C9" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mb)"/>
+<circle cx="578" cy="552" r="8" fill="#1C74C9"/>
+<text x="578" y="556" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >6</text>
+<path d="M600 478 H314 V190 H599" fill="none" stroke="#1C74C9" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mb)"/>
+<circle cx="578" cy="478" r="8" fill="#1C74C9"/>
+<text x="578" y="482" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >5</text>
+<path d="M600 256 H326 V126 H599" fill="none" stroke="#1C74C9" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mb)"/>
+<circle cx="578" cy="256" r="8" fill="#1C74C9"/>
+<text x="578" y="260" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >2</text>
+<path d="M600 330 H338 V195 H599" fill="none" stroke="#1C74C9" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mb)"/>
+<circle cx="578" cy="330" r="8" fill="#1C74C9"/>
+<text x="578" y="334" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >3</text>
+<path d="M600 404 H350 V264 H599" fill="none" stroke="#1C74C9" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mb)"/>
+<circle cx="578" cy="404" r="8" fill="#1C74C9"/>
+<text x="578" y="408" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >4</text>
+<path d="M600 182 H362 V131 H599" fill="none" stroke="#1C74C9" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mb)"/>
+<circle cx="578" cy="182" r="8" fill="#1C74C9"/>
+<text x="578" y="186" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >1</text>
+<path d="M600 108 H374 V200 H599" fill="none" stroke="#1C74C9" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mb)"/>
+<circle cx="578" cy="108" r="8" fill="#1C74C9"/>
+<text x="578" y="112" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >8</text>
+<rect x="600" y="100" width="210" height="56" rx="8" fill="#fff" stroke="#444" stroke-width="1.4"/>
+<circle cx="624" cy="122" r="13" fill="#6DB33F"/><path d="M618 128 Q618 114 631 115 Q630 127 618 128Z" fill="#fff"/>
+<text x="646" y="122" font-size="14" font-weight="700" fill="#222" text-anchor="start" >MS1 · account</text>
+<text x="646" y="138" font-size="11.5" font-weight="400" fill="#222" text-anchor="start" >Spring Boot · :8081</text>
+<text x="646" y="151" font-size="10" font-weight="400" fill="#666" text-anchor="start" >Eureka : ACCOUNT</text>
+<line x1="810" y1="126" x2="836" y2="126" stroke="#8A8A8A" stroke-width="1"/>
+<line x1="810" y1="130" x2="836" y2="130" stroke="#8A8A8A" stroke-width="1"/>
+<path d="M836 112 V142 A40 7 0 0 0 916 142 V112" fill="#fff" stroke="#555" stroke-width="1.2"/><ellipse cx="876" cy="112" rx="40" ry="7" fill="#F4F4F4" stroke="#555" stroke-width="1.2"/>
+<text x="876" y="131" font-size="10" font-weight="700" fill="#222" text-anchor="middle" >account_db</text>
+<text x="876" y="142" font-size="9.5" font-weight="400" fill="#555" text-anchor="middle" >PostgreSQL</text>
+<rect x="600" y="174" width="210" height="56" rx="8" fill="#fff" stroke="#444" stroke-width="1.4"/>
+<circle cx="624" cy="196" r="13" fill="#6DB33F"/><path d="M618 202 Q618 188 631 189 Q630 201 618 202Z" fill="#fff"/>
+<text x="646" y="196" font-size="14" font-weight="700" fill="#222" text-anchor="start" >MS2 · wallet</text>
+<text x="646" y="212" font-size="11.5" font-weight="400" fill="#222" text-anchor="start" >Spring Boot · :8082</text>
+<text x="646" y="225" font-size="10" font-weight="400" fill="#666" text-anchor="start" >Eureka : WALLET</text>
+<line x1="810" y1="200" x2="836" y2="200" stroke="#8A8A8A" stroke-width="1"/>
+<line x1="810" y1="204" x2="836" y2="204" stroke="#8A8A8A" stroke-width="1"/>
+<path d="M836 186 V216 A40 7 0 0 0 916 216 V186" fill="#fff" stroke="#555" stroke-width="1.2"/><ellipse cx="876" cy="186" rx="40" ry="7" fill="#F4F4F4" stroke="#555" stroke-width="1.2"/>
+<text x="876" y="205" font-size="10" font-weight="700" fill="#222" text-anchor="middle" >wallet_db</text>
+<text x="876" y="216" font-size="9.5" font-weight="400" fill="#555" text-anchor="middle" >PostgreSQL</text>
+<rect x="600" y="248" width="210" height="56" rx="8" fill="#fff" stroke="#444" stroke-width="1.4"/>
+<circle cx="624" cy="270" r="13" fill="#6DB33F"/><path d="M618 276 Q618 262 631 263 Q630 275 618 276Z" fill="#fff"/>
+<text x="646" y="270" font-size="14" font-weight="700" fill="#222" text-anchor="start" >MS3 · expense</text>
+<text x="646" y="286" font-size="11.5" font-weight="400" fill="#222" text-anchor="start" >Spring Boot · :8083</text>
+<text x="646" y="299" font-size="10" font-weight="400" fill="#666" text-anchor="start" >Eureka : EXPENSE</text>
+<line x1="810" y1="274" x2="836" y2="274" stroke="#8A8A8A" stroke-width="1"/>
+<line x1="810" y1="278" x2="836" y2="278" stroke="#8A8A8A" stroke-width="1"/>
+<path d="M836 260 V290 A40 7 0 0 0 916 290 V260" fill="#fff" stroke="#555" stroke-width="1.2"/><ellipse cx="876" cy="260" rx="40" ry="7" fill="#F4F4F4" stroke="#555" stroke-width="1.2"/>
+<text x="876" y="279" font-size="10" font-weight="700" fill="#222" text-anchor="middle" >expense_db</text>
+<text x="876" y="290" font-size="9.5" font-weight="400" fill="#555" text-anchor="middle" >MongoDB</text>
+<rect x="600" y="322" width="210" height="56" rx="8" fill="#fff" stroke="#444" stroke-width="1.4"/>
+<circle cx="624" cy="344" r="13" fill="#6DB33F"/><path d="M618 350 Q618 336 631 337 Q630 349 618 350Z" fill="#fff"/>
+<text x="646" y="344" font-size="14" font-weight="700" fill="#222" text-anchor="start" >MS4 · settlement</text>
+<text x="646" y="360" font-size="11.5" font-weight="400" fill="#222" text-anchor="start" >Spring Boot · :8084</text>
+<text x="646" y="373" font-size="10" font-weight="400" fill="#666" text-anchor="start" >Eureka : SETTLEMENT</text>
+<line x1="810" y1="348" x2="836" y2="348" stroke="#8A8A8A" stroke-width="1"/>
+<line x1="810" y1="352" x2="836" y2="352" stroke="#8A8A8A" stroke-width="1"/>
+<path d="M836 334 V364 A40 7 0 0 0 916 364 V334" fill="#fff" stroke="#555" stroke-width="1.2"/><ellipse cx="876" cy="334" rx="40" ry="7" fill="#F4F4F4" stroke="#555" stroke-width="1.2"/>
+<text x="876" y="353" font-size="10" font-weight="700" fill="#222" text-anchor="middle" >settlement_db</text>
+<text x="876" y="364" font-size="9.5" font-weight="400" fill="#555" text-anchor="middle" >PostgreSQL</text>
+<rect x="600" y="396" width="210" height="56" rx="8" fill="#fff" stroke="#444" stroke-width="1.4"/>
+<circle cx="624" cy="418" r="13" fill="#6DB33F"/><path d="M618 424 Q618 410 631 411 Q630 423 618 424Z" fill="#fff"/>
+<text x="646" y="418" font-size="14" font-weight="700" fill="#222" text-anchor="start" >MS5 · recurring</text>
+<text x="646" y="434" font-size="11.5" font-weight="400" fill="#222" text-anchor="start" >Spring Boot · :8085</text>
+<text x="646" y="447" font-size="10" font-weight="400" fill="#666" text-anchor="start" >Eureka : RECURRING</text>
+<line x1="810" y1="422" x2="836" y2="422" stroke="#8A8A8A" stroke-width="1"/>
+<line x1="810" y1="426" x2="836" y2="426" stroke="#8A8A8A" stroke-width="1"/>
+<path d="M836 408 V438 A40 7 0 0 0 916 438 V408" fill="#fff" stroke="#555" stroke-width="1.2"/><ellipse cx="876" cy="408" rx="40" ry="7" fill="#F4F4F4" stroke="#555" stroke-width="1.2"/>
+<text x="876" y="427" font-size="10" font-weight="700" fill="#222" text-anchor="middle" >recurring_db</text>
+<text x="876" y="438" font-size="9.5" font-weight="400" fill="#555" text-anchor="middle" >PostgreSQL</text>
+<rect x="600" y="470" width="210" height="56" rx="8" fill="#fff" stroke="#444" stroke-width="1.4"/>
+<circle cx="624" cy="492" r="13" fill="#6DB33F"/><path d="M618 498 Q618 484 631 485 Q630 497 618 498Z" fill="#fff"/>
+<text x="646" y="492" font-size="14" font-weight="700" fill="#222" text-anchor="start" >MS6 · savings</text>
+<text x="646" y="508" font-size="11.5" font-weight="400" fill="#222" text-anchor="start" >Spring Boot · :8086</text>
+<text x="646" y="521" font-size="10" font-weight="400" fill="#666" text-anchor="start" >Eureka : SAVINGS</text>
+<line x1="810" y1="496" x2="836" y2="496" stroke="#8A8A8A" stroke-width="1"/>
+<line x1="810" y1="500" x2="836" y2="500" stroke="#8A8A8A" stroke-width="1"/>
+<path d="M836 482 V512 A40 7 0 0 0 916 512 V482" fill="#fff" stroke="#555" stroke-width="1.2"/><ellipse cx="876" cy="482" rx="40" ry="7" fill="#F4F4F4" stroke="#555" stroke-width="1.2"/>
+<text x="876" y="501" font-size="10" font-weight="700" fill="#222" text-anchor="middle" >savings_db</text>
+<text x="876" y="512" font-size="9.5" font-weight="400" fill="#555" text-anchor="middle" >PostgreSQL</text>
+<rect x="600" y="544" width="210" height="56" rx="8" fill="#FFF6CF" stroke="#444" stroke-width="1.4"/>
+<circle cx="624" cy="566" r="13" fill="#6DB33F"/><path d="M618 572 Q618 558 631 559 Q630 571 618 572Z" fill="#fff"/>
+<text x="646" y="566" font-size="14" font-weight="700" fill="#222" text-anchor="start" >MS7 · fraud (avancé)</text>
+<text x="646" y="582" font-size="11.5" font-weight="400" fill="#222" text-anchor="start" >Spring Boot · :8087</text>
+<text x="646" y="595" font-size="10" font-weight="400" fill="#666" text-anchor="start" >Eureka : FRAUD</text>
+<line x1="810" y1="570" x2="836" y2="570" stroke="#8A8A8A" stroke-width="1"/>
+<line x1="810" y1="574" x2="836" y2="574" stroke="#8A8A8A" stroke-width="1"/>
+<path d="M836 556 V586 A40 7 0 0 0 916 586 V556" fill="#fff" stroke="#555" stroke-width="1.2"/><ellipse cx="876" cy="556" rx="40" ry="7" fill="#F4F4F4" stroke="#555" stroke-width="1.2"/>
+<text x="876" y="575" font-size="10" font-weight="700" fill="#222" text-anchor="middle" >fraud_db</text>
+<text x="876" y="586" font-size="9.5" font-weight="400" fill="#555" text-anchor="middle" >PostgreSQL</text>
+<rect x="600" y="618" width="210" height="56" rx="8" fill="#F1E9FA" stroke="#444" stroke-width="1.4"/>
+<circle cx="624" cy="640" r="13" fill="#6DB33F"/><path d="M618 646 Q618 632 631 633 Q630 645 618 646Z" fill="#fff"/>
+<text x="646" y="640" font-size="14" font-weight="700" fill="#222" text-anchor="start" >MS8 · notification</text>
+<text x="646" y="656" font-size="11.5" font-weight="400" fill="#222" text-anchor="start" >Spring Boot · :8088</text>
+<text x="646" y="669" font-size="10" font-weight="400" fill="#666" text-anchor="start" >Eureka : NOTIFICATION</text>
+<line x1="810" y1="644" x2="836" y2="644" stroke="#8A8A8A" stroke-width="1"/>
+<line x1="810" y1="648" x2="836" y2="648" stroke="#8A8A8A" stroke-width="1"/>
+<path d="M836 630 V660 A40 7 0 0 0 916 660 V630" fill="#fff" stroke="#555" stroke-width="1.2"/><ellipse cx="876" cy="630" rx="40" ry="7" fill="#F4F4F4" stroke="#555" stroke-width="1.2"/>
+<text x="876" y="649" font-size="10" font-weight="700" fill="#222" text-anchor="middle" >notification_db</text>
+<text x="876" y="660" font-size="9.5" font-weight="400" fill="#555" text-anchor="middle" >PostgreSQL</text>
+<line x1="916" y1="573" x2="932" y2="573" stroke="#8A8A8A" stroke-width="1"/>
+<line x1="916" y1="577" x2="932" y2="577" stroke="#8A8A8A" stroke-width="1"/>
+<path d="M932 556 V586 A40 7 0 0 0 1012 586 V556" fill="#FFE3E0" stroke="#B33" stroke-width="1.2"/><ellipse cx="972" cy="556" rx="40" ry="7" fill="#FFD0CC" stroke="#B33" stroke-width="1.2"/>
+<text x="972" y="575" font-size="10" font-weight="700" fill="#222" text-anchor="middle" >Redis :6379</text>
+<text x="972" y="586" font-size="9.5" font-weight="400" fill="#555" text-anchor="middle" >compteurs</text>
+<rect x="1090" y="106" width="64" height="586" rx="10" fill="#FFE9CC" stroke="#F58220" stroke-width="2"/>
+<rect x="1108" y="118" width="28" height="28" rx="4" fill="#F58220"/><path d="M1115 142 V128 H1120 V134 H1124 V128 H1129 V142Z" fill="#fff"/>
+<text transform="translate(1117,400) rotate(-90)" font-size="14" font-weight="700" text-anchor="middle" fill="#222">RabbitMQ · courtier de messages · :5672 (UI :15672)</text>
+<text transform="translate(1137,400) rotate(-90)" font-size="12" text-anchor="middle" fill="#222">exchange <tspan font-weight="700">splitpay.events</tspan> (topic) — événements asynchrones</text>
+<rect x="1195" y="100" width="372" height="340" rx="10" fill="#F6FAFF" stroke="#B9D3F0"/>
+<text x="1211" y="126" font-size="14" font-weight="700" fill="#1C74C9" text-anchor="start" >Appels synchrones (OpenFeign)</text>
+<circle cx="1219" cy="156" r="9" fill="#1C74C9"/>
+<text x="1219" y="160" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >1</text>
+<text x="1237" y="154" font-size="12" font-weight="700" fill="#222" text-anchor="start" >wallet → account</text>
+<text x="1237" y="169" font-size="10.5" font-weight="400" fill="#444" text-anchor="start" >GET /users/{id}/kyc-status</text>
+<circle cx="1219" cy="190" r="9" fill="#1C74C9"/>
+<text x="1219" y="194" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >2</text>
+<text x="1237" y="188" font-size="12" font-weight="700" fill="#222" text-anchor="start" >expense → account</text>
+<text x="1237" y="203" font-size="10.5" font-weight="400" fill="#444" text-anchor="start" >GET /groups/{id}/members</text>
+<circle cx="1219" cy="224" r="9" fill="#1C74C9"/>
+<text x="1219" y="228" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >3</text>
+<text x="1237" y="222" font-size="12" font-weight="700" fill="#222" text-anchor="start" >settlement → wallet</text>
+<text x="1237" y="237" font-size="10.5" font-weight="400" fill="#444" text-anchor="start" >POST /wallets/transfers</text>
+<circle cx="1219" cy="258" r="9" fill="#1C74C9"/>
+<text x="1219" y="262" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >4</text>
+<text x="1237" y="256" font-size="12" font-weight="700" fill="#222" text-anchor="start" >recurring → expense</text>
+<text x="1237" y="271" font-size="10.5" font-weight="400" fill="#444" text-anchor="start" >POST /expenses</text>
+<circle cx="1219" cy="292" r="9" fill="#1C74C9"/>
+<text x="1219" y="296" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >5</text>
+<text x="1237" y="290" font-size="12" font-weight="700" fill="#222" text-anchor="start" >savings → wallet</text>
+<text x="1237" y="305" font-size="10.5" font-weight="400" fill="#444" text-anchor="start" >POST /wallets/transfers (ROUNDUP)</text>
+<circle cx="1219" cy="326" r="9" fill="#1C74C9"/>
+<text x="1219" y="330" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >6</text>
+<text x="1237" y="324" font-size="12" font-weight="700" fill="#222" text-anchor="start" >fraud → account</text>
+<text x="1237" y="339" font-size="10.5" font-weight="400" fill="#444" text-anchor="start" >GET /users/{id}</text>
+<circle cx="1219" cy="360" r="9" fill="#1C74C9"/>
+<text x="1219" y="364" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >7</text>
+<text x="1237" y="358" font-size="12" font-weight="700" fill="#222" text-anchor="start" >notification → account</text>
+<text x="1237" y="373" font-size="10.5" font-weight="400" fill="#444" text-anchor="start" >GET /users/{id}/contact</text>
+<circle cx="1219" cy="394" r="9" fill="#1C74C9"/>
+<text x="1219" y="398" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" >8</text>
+<text x="1237" y="392" font-size="12" font-weight="700" fill="#222" text-anchor="start" >account → wallet</text>
+<text x="1237" y="407" font-size="10.5" font-weight="400" fill="#444" text-anchor="start" >GET /wallets/by-user/{id}</text>
+<rect x="1195" y="460" width="372" height="170" rx="10" fill="#F4FBF5" stroke="#B7DEBE"/>
+<text x="1211" y="486" font-size="14" font-weight="700" fill="#2E8B3A" text-anchor="start" >Événements asynchrones (RabbitMQ)</text>
+<text x="1211" y="512" font-size="11" font-weight="400" fill="#333" text-anchor="start" >Flèche double : le service publie et consomme</text>
+<text x="1211" y="532" font-size="11" font-weight="400" fill="#333" text-anchor="start" >expense.created → settlement (dettes), recurring</text>
+<text x="1211" y="552" font-size="11" font-weight="400" fill="#333" text-anchor="start" >debt.settled → expense (part payée)</text>
+<text x="1211" y="572" font-size="11" font-weight="400" fill="#333" text-anchor="start" >wallet.debited → savings (arrondi), fraud</text>
+<text x="1211" y="592" font-size="11" font-weight="400" fill="#333" text-anchor="start" >fraud.alert-raised → wallet (gel), notification</text>
+<text x="1211" y="612" font-size="11" font-weight="400" fill="#333" text-anchor="start" >Notification : consomme les événements métier</text>
+<rect x="430" y="745" width="230" height="56" rx="8" fill="#FFE2B8" stroke="#E0A040" stroke-width="1.4"/>
+<circle cx="452" cy="769" r="12" fill="#6DB33F"/><path d="M446 775 Q446 761 459 762 Q458 774 446 775Z" fill="#fff"/>
+<text x="472" y="769" font-size="13.5" font-weight="700" fill="#222" text-anchor="start" >Eureka Server · :8761</text>
+<text x="472" y="786" font-size="11" font-weight="400" fill="#444" text-anchor="start" >annuaire de services</text>
+<rect x="800" y="745" width="230" height="56" rx="8" fill="#FFE2B8" stroke="#E0A040" stroke-width="1.4"/>
+<circle cx="822" cy="769" r="12" fill="#6DB33F"/><path d="M816 775 Q816 761 829 762 Q828 774 816 775Z" fill="#fff"/>
+<text x="842" y="769" font-size="13.5" font-weight="700" fill="#222" text-anchor="start" >Config Server · :8888</text>
+<text x="842" y="786" font-size="11" font-weight="400" fill="#444" text-anchor="start" >Spring Cloud Config</text>
+<rect x="1085" y="738" width="130" height="70" rx="6" fill="#fff" stroke="#333" stroke-dasharray="5 3"/>
+<circle cx="1110" cy="773" r="13" fill="#222"/>
+<text x="1130" y="770" font-size="12" font-weight="700" fill="#222" text-anchor="start" >config-repo</text>
+<text x="1130" y="786" font-size="10.5" font-weight="400" fill="#444" text-anchor="start" >Git (GitHub)</text>
+<rect x="40" y="745" width="190" height="62" rx="8" fill="#FFE2B8" stroke="#E0A040" stroke-width="1.4"/>
+<text x="60" y="770" font-size="13.5" font-weight="700" fill="#222" text-anchor="start" >Keycloak · :8180</text>
+<text x="60" y="788" font-size="11" font-weight="400" fill="#444" text-anchor="start" >fournisseur d’identité</text>
+<text x="60" y="801" font-size="9.5" font-weight="400" fill="#666" text-anchor="start" >realm splitpay</text>
+<rect x="560" y="835" width="110" height="30" rx="6" fill="#7BA7E0"/>
+<text x="615" y="855" font-size="12" font-weight="700" fill="#fff" text-anchor="middle" >Côté backend</text>
+<line x1="102" y1="690" x2="102" y2="744" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="108" y="722" font-size="10.5" font-weight="400" fill="#E04A2F" text-anchor="start" >login → JWT</text>
+<line x1="205" y1="744" x2="205" y2="691" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="214" y="722" font-size="10.5" font-weight="400" fill="#E04A2F" text-anchor="start" >valide le JWT</text>
+<text x="214" y="734" font-size="10.5" font-weight="400" fill="#E04A2F" text-anchor="start" >(clés publiques)</text>
+<path d="M240 691 V790 H430" fill="none" stroke="#222" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#mk)"/>
+<text x="300" y="774" font-size="10.5" font-weight="400" fill="#222" text-anchor="start" >récupère le registre</text>
+<text x="300" y="762" font-size="10.5" font-weight="400" fill="#222" text-anchor="start" >(résout lb://)</text>
+<line x1="540" y1="705" x2="540" y2="744" stroke="#222" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#mk)"/>
+<text x="548" y="722" font-size="10.5" font-weight="400" fill="#222" text-anchor="start" >enregistrement + heartbeat (30 s)</text>
+<text x="548" y="734" font-size="10.5" font-weight="400" fill="#222" text-anchor="start" >+ récupération du registre</text>
+<line x1="800" y1="773" x2="662" y2="773" stroke="#222" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#mk)"/>
+<text x="731" y="766" font-size="10.5" font-weight="400" fill="#222" text-anchor="middle" >enregistrement</text>
+<line x1="915" y1="744" x2="915" y2="706" stroke="#222" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#mk)"/>
+<text x="923" y="722" font-size="10.5" font-weight="400" fill="#222" text-anchor="start" >configuration au démarrage</text>
+<line x1="1085" y1="773" x2="1032" y2="773" stroke="#222" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#mk)"/>
+<rect x="1245" y="725" width="325" height="165" rx="8" fill="#fff" stroke="#999"/>
+<text x="1259" y="747" font-size="13" font-weight="700" fill="#222" text-anchor="start" >Légende</text>
+<line x1="1259" y1="769" x2="1305" y2="769" stroke="#E04A2F" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mr)"/>
+<text x="1317" y="773" font-size="11" font-weight="400" fill="#222" text-anchor="start" >HTTP via la gateway (route → lb://NOM)</text>
+<line x1="1259" y1="793" x2="1305" y2="793" stroke="#1C74C9" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mb)"/>
+<text x="1317" y="797" font-size="11" font-weight="400" fill="#222" text-anchor="start" >Appel synchrone entre services (OpenFeign)</text>
+<line x1="1259" y1="817" x2="1305" y2="817" stroke="#2E8B3A" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mg)"/>
+<text x="1317" y="821" font-size="11" font-weight="400" fill="#222" text-anchor="start" >Événement asynchrone (RabbitMQ)</text>
+<line x1="1259" y1="841" x2="1305" y2="841" stroke="#222" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mk)"/>
+<text x="1317" y="845" font-size="11" font-weight="400" fill="#222" text-anchor="start" >Découverte de services / configuration</text>
+<line x1="1259" y1="863" x2="1305" y2="863" stroke="#8A8A8A" stroke-width="1"/>
+<line x1="1259" y1="867" x2="1305" y2="867" stroke="#8A8A8A" stroke-width="1"/>
+<text x="1317" y="869" font-size="11" font-weight="400" fill="#222" text-anchor="start" >Accès base de données (une base par service)</text>
+</svg>

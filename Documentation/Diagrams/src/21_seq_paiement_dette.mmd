@@ -1,0 +1,27 @@
+sequenceDiagram
+  actor B as Bob
+  participant GW as API Gateway
+  participant SE as settlement-service
+  participant WA as wallet-service
+  participant MQ as RabbitMQ
+  participant EX as expense-service
+  participant NO as notification-service
+  B->>GW: POST /api/debts/{id}/pay
+  GW->>SE: route
+  SE->>WA: POST /api/wallets/transfers (Idempotency-Key = debtId)
+  alt solde suffisant
+    WA-->>SE: 200 {transactionId}
+    SE->>SE: dette → PAID + Payment SUCCESS
+    SE-->>B: 200 OK
+    SE--)MQ: publie debt.settled
+    MQ--)EX: part de Bob → PAID
+    MQ--)NO: "Bob t'a payé"
+  else solde insuffisant
+    WA-->>SE: 409 INSUFFICIENT_FUNDS (rien n'est débité)
+    SE->>SE: dette reste UNPAID + Payment FAILED
+    SE-->>B: 409
+    SE--)MQ: publie settlement.failed
+    MQ--)NO: "Paiement refusé : solde insuffisant"
+  else wallet-service indisponible
+    SE-->>B: 503 (circuit breaker) – dette inchangée, nouvel essai sûr grâce à l'idempotence
+  end

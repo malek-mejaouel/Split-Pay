@@ -1,0 +1,29 @@
+flowchart LR
+  E(["Étudiant"])
+  A(["Administrateur"])
+  P(["Système de paiement externe (simulé)"])
+  S(["Système (événements)"])
+
+  subgraph SP["Plateforme SplitPay"]
+    direction TB
+    U1["S'inscrire / se connecter"]
+    U2["Soumettre une vérification d'identité (KYC)"]
+    U3["Créer une colocation / un groupe et inviter des membres"]
+    U4["Recharger son portefeuille"]
+    U5["Créer une dépense partagée"]
+    U6["Consulter ses dettes et créances"]
+    U7["Rembourser une dette en un clic"]
+    U8["Programmer une dépense récurrente (loyer, internet)"]
+    U9["Épargner par arrondi et suivre ses objectifs"]
+    U10["Recevoir des notifications"]
+    U11["Valider / rejeter un KYC"]
+    U12["Surveiller les alertes de fraude en temps réel"]
+    U13["Configurer les règles de détection"]
+    U14["Générer dettes, échéances et arrondis automatiquement"]
+    U15["Détecter les transactions suspectes et geler un portefeuille"]
+  end
+
+  E --> U1 & U2 & U3 & U4 & U5 & U6 & U7 & U8 & U9 & U10
+  A --> U11 & U12 & U13
+  P --> U4
+  S --> U14 & U15

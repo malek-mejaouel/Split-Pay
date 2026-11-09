@@ -1,0 +1,34 @@
+classDiagram
+  class Debt {
+    UUID id
+    String expenseId
+    UUID debtorId
+    UUID creditorId
+    BigDecimal amount
+    String currency
+    DebtStatus status
+    LocalDate dueDate
+    Instant createdAt
+  }
+  class Payment {
+    UUID id
+    UUID walletTransactionId
+    String idempotencyKey
+    PaymentStatus status
+    String failureReason
+    Instant createdAt
+  }
+  class DebtStatus {
+    <<enumeration>>
+    UNPAID
+    PAID
+    CANCELLED
+  }
+  class PaymentStatus {
+    <<enumeration>>
+    SUCCESS
+    FAILED
+  }
+  Debt "1" --> "*" Payment
+  Debt --> DebtStatus
+  Payment --> PaymentStatus

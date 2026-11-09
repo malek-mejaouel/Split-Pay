@@ -1,0 +1,19 @@
+flowchart LR
+  EX{{"exchange splitpay.events (topic)"}}
+
+  AC["account-service"] -- "user.registered<br/>kyc.validated / kyc.rejected<br/>group.member-added" --> EX
+  WA["wallet-service"] -- "wallet.created<br/>wallet.debited<br/>wallet.credited" --> EX
+  EP["expense-service"] -- "expense.created<br/>expense.cancelled" --> EX
+  SE["settlement-service"] -- "debt.created<br/>debt.settled<br/>settlement.failed" --> EX
+  RE["recurring-service"] -- "recurring.triggered<br/>recurring.failed" --> EX
+  SA["savings-service"] -- "roundup.saved<br/>goal.reached" --> EX
+  FR["fraud-service"] -- "fraud.alert-raised" --> EX
+
+  EX -- "wallet.created" --> AC2["account-service"]
+  EX -- "user.registered / kyc.validated / fraud.alert-raised" --> WA2["wallet-service"]
+  EX -- "debt.settled" --> EP2["expense-service (part payée)"]
+  EX -- "expense.created / expense.cancelled" --> SE2["settlement-service (crée / annule les dettes)"]
+  EX -- "expense.created" --> RE2["recurring-service (prochaine échéance)"]
+  EX -- "wallet.debited" --> SA2["savings-service (arrondi)"]
+  EX -- "wallet.debited / wallet.credited / debt.settled" --> FR2["fraud-service (scoring)"]
+  EX -- "debt.created / debt.settled / settlement.failed / ... " --> NO["notification-service"]

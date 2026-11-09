@@ -1,0 +1,96 @@
+# Infrastructure de développement SplitPay : une base PAR microservice + MongoDB + Redis + RabbitMQ + Keycloak + Mailhog.
+# Lancer :  docker compose -f docker-compose.infra.yml up -d
+name: splitpay
+
+x-pg: &pg
+  image: postgres:16-alpine
+  restart: unless-stopped
+  environment: &pgenv
+    POSTGRES_USER: splitpay
+    POSTGRES_PASSWORD: splitpay_dev_password   # développement uniquement : utiliser un .env ensuite
+
+services:
+  account-db:
+    <<: *pg
+    environment: { <<: *pgenv, POSTGRES_DB: account_db }
+    ports: ["5441:5432"]
+    volumes: [account_data:/var/lib/postgresql/data]
+  wallet-db:
+    <<: *pg
+    environment: { <<: *pgenv, POSTGRES_DB: wallet_db }
+    ports: ["5442:5432"]
+    volumes: [wallet_data:/var/lib/postgresql/data]
+  settlement-db:
+    <<: *pg
+    environment: { <<: *pgenv, POSTGRES_DB: settlement_db }
+    ports: ["5444:5432"]
+    volumes: [settlement_data:/var/lib/postgresql/data]
+  recurring-db:
+    <<: *pg
+    environment: { <<: *pgenv, POSTGRES_DB: recurring_db }
+    ports: ["5445:5432"]
+    volumes: [recurring_data:/var/lib/postgresql/data]
+  savings-db:
+    <<: *pg
+    environment: { <<: *pgenv, POSTGRES_DB: savings_db }
+    ports: ["5446:5432"]
+    volumes: [savings_data:/var/lib/postgresql/data]
+  fraud-db:
+    <<: *pg
+    environment: { <<: *pgenv, POSTGRES_DB: fraud_db }
+    ports: ["5447:5432"]
+    volumes: [fraud_data:/var/lib/postgresql/data]
+  notification-db:
+    <<: *pg
+    environment: { <<: *pgenv, POSTGRES_DB: notification_db }
+    ports: ["5448:5432"]
+    volumes: [notification_data:/var/lib/postgresql/data]
+  keycloak-db:
+    <<: *pg
+    environment: { <<: *pgenv, POSTGRES_DB: keycloak_db }
+    volumes: [keycloak_data:/var/lib/postgresql/data]
+
+  expense-db:                       # MongoDB : base du expense-service
+    image: mongo:7
+    restart: unless-stopped
+    ports: ["27017:27017"]
+    volumes: [expense_data:/data/db]
+
+  redis:                            # compteurs temporaires du fraud-service
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports: ["6379:6379"]
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    restart: unless-stopped
+    ports: ["5672:5672", "15672:15672"]   # UI : http://localhost:15672 (guest/guest)
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    command: start-dev
+    restart: unless-stopped
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak_db
+      KC_DB_USERNAME: splitpay
+      KC_DB_PASSWORD: splitpay_dev_password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports: ["8180:8080"]
+    depends_on: [keycloak-db]
+
+  mailhog:
+    image: mailhog/mailhog
+    ports: ["1025:1025", "8025:8025"]      # UI : http://localhost:8025
+
+volumes:
+  account_data:
+  wallet_data:
+  expense_data:
+  settlement_data:
+  recurring_data:
+  savings_data:
+  fraud_data:
+  notification_data:
+  keycloak_data:

@@ -1,0 +1,20 @@
+sequenceDiagram
+  participant RE as recurring-service
+  participant EX as expense-service
+  participant MQ as RabbitMQ
+  participant SE as settlement-service
+  participant NO as notification-service
+  Note over RE: Tâche planifiée le 1er du mois
+  RE->>EX: POST /api/expenses {loyer 600€, recurringId} (OpenFeign, retry ×3)
+  alt expense-service disponible
+    EX-->>RE: 201 {expenseId}
+    EX--)MQ: publie expense.created
+    MQ--)RE: consomme → programme la prochaine échéance
+    MQ--)SE: consomme → 2 dettes de 200€
+    RE--)MQ: publie recurring.triggered
+    MQ--)NO: notifie le groupe
+  else indisponible après retries
+    RE->>RE: Execution = FAILED
+    RE--)MQ: publie recurring.failed
+    MQ--)NO: alerte le créateur
+  end

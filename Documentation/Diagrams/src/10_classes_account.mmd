@@ -1,0 +1,47 @@
+classDiagram
+  class User {
+    UUID id
+    String keycloakId
+    String email
+    String firstName
+    String lastName
+    String phone
+    UserStatus status
+    KycStatus kycStatus
+    Instant createdAt
+  }
+  class KycRequest {
+    UUID id
+    DocumentType documentType
+    String documentRef
+    KycStatus status
+    Instant submittedAt
+    UUID reviewedBy
+    Instant reviewedAt
+    String rejectionReason
+  }
+  class Group {
+    UUID id
+    String name
+    String description
+    String currency
+    UUID createdBy
+    Instant createdAt
+  }
+  class GroupMember {
+    UUID id
+    MemberRole role
+    MemberStatus status
+    Instant joinedAt
+  }
+  class KycStatus {
+    <<enumeration>>
+    NONE
+    PENDING
+    VALIDATED
+    REJECTED
+  }
+  User "1" --> "*" KycRequest
+  Group "1" --> "*" GroupMember
+  User "1" --> "*" GroupMember
+  User --> KycStatus

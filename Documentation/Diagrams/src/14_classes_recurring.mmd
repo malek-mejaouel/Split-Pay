@@ -1,0 +1,38 @@
+classDiagram
+  class RecurringExpense {
+    UUID id
+    UUID groupId
+    UUID payerId
+    String title
+    BigDecimal amount
+    String currency
+    Frequency frequency
+    int dayOfMonth
+    SplitType splitType
+    LocalDate nextDueDate
+    boolean active
+    Instant createdAt
+  }
+  class RecurringExecution {
+    UUID id
+    LocalDate dueDate
+    ExecStatus status
+    int attempts
+    String expenseId
+    Instant executedAt
+  }
+  class Frequency {
+    <<enumeration>>
+    WEEKLY
+    MONTHLY
+    YEARLY
+  }
+  class ExecStatus {
+    <<enumeration>>
+    SUCCESS
+    RETRY
+    FAILED
+  }
+  RecurringExpense "1" --> "*" RecurringExecution
+  RecurringExpense --> Frequency
+  RecurringExecution --> ExecStatus

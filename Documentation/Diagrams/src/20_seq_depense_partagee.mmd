@@ -1,0 +1,22 @@
+sequenceDiagram
+  actor A as Alice
+  participant GW as API Gateway
+  participant EX as expense-service
+  participant AC as account-service
+  participant MQ as RabbitMQ
+  participant SE as settlement-service
+  participant NO as notification-service
+  A->>GW: POST /api/expenses {groupId, 60€, EQUAL} (JWT)
+  GW->>EX: route lb://EXPENSE-SERVICE
+  EX->>AC: GET /api/groups/{id}/members (OpenFeign, sync)
+  alt account-service disponible
+    AC-->>EX: 200 [Alice, Bob, Chloé]
+    EX->>EX: calcule 3 parts de 20€ (BigDecimal) + enregistre
+    EX-->>A: 201 Created
+    EX--)MQ: publie expense.created
+    MQ--)SE: consomme → crée 2 dettes (Bob→Alice, Chloé→Alice)
+    SE--)MQ: publie debt.created ×2
+    MQ--)NO: consomme → "Tu dois 20 € à Alice"
+  else account-service indisponible
+    EX-->>A: 503 (circuit breaker, rien n'est enregistré)
+  end

@@ -1,0 +1,49 @@
+classDiagram
+  class FraudRule {
+    UUID id
+    String code
+    RuleType type
+    double threshold
+    int windowSec
+    int weight
+    boolean enabled
+  }
+  class RiskProfile {
+    UUID userId
+    BigDecimal avgAmount
+    long txCount
+    int riskScore
+    Instant lastUpdated
+  }
+  class FraudAlert {
+    UUID id
+    UUID userId
+    UUID walletId
+    int score
+    Severity severity
+    String triggeredRules
+    AlertStatus status
+    UUID reviewedBy
+    Instant createdAt
+  }
+  class ProcessedEvent {
+    UUID eventId
+    Instant processedAt
+  }
+  class RuleType {
+    <<enumeration>>
+    VELOCITY
+    AMOUNT_ANOMALY
+    NEW_ACCOUNT_HIGH_VALUE
+    PING_PONG
+    FAILURE_BURST
+  }
+  class AlertStatus {
+    <<enumeration>>
+    OPEN
+    CONFIRMED
+    DISMISSED
+  }
+  FraudRule --> RuleType
+  FraudAlert --> AlertStatus
+  RiskProfile "1" --> "*" FraudAlert

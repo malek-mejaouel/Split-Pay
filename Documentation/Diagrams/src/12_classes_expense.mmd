@@ -1,0 +1,35 @@
+classDiagram
+  class Expense {
+    String id
+    UUID groupId
+    UUID payerId
+    String title
+    BigDecimal amount
+    String currency
+    String category
+    LocalDate date
+    SplitType splitType
+    ExpenseStatus status
+    UUID recurringId
+    Instant createdAt
+  }
+  class Share {
+    UUID userId
+    BigDecimal amount
+    ShareStatus status
+    Instant paidAt
+  }
+  class SplitType {
+    <<enumeration>>
+    EQUAL
+    PERCENT
+    EXACT
+  }
+  class ShareStatus {
+    <<enumeration>>
+    PENDING
+    PAID
+  }
+  Expense "1" *-- "*" Share : document imbriqué
+  Expense --> SplitType
+  Share --> ShareStatus

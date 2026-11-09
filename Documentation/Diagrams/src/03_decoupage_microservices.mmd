@@ -1,0 +1,34 @@
+flowchart LR
+  subgraph I["Identité & groupes"]
+    AC["account-service<br/>utilisateurs, KYC, groupes"]
+  end
+  subgraph M["Argent"]
+    WA["wallet-service<br/>portefeuille, transferts"]
+  end
+  subgraph D["Dépenses"]
+    EX["expense-service<br/>dépenses et parts (MongoDB)"]
+  end
+  subgraph R["Remboursement"]
+    SE["settlement-service<br/>dettes, paiements"]
+  end
+  subgraph C["Planification"]
+    RE["recurring-service<br/>dépenses récurrentes"]
+  end
+  subgraph E["Épargne"]
+    SA["savings-service<br/>arrondi, objectifs"]
+  end
+  subgraph F["Risque (avancé)"]
+    FR["fraud-service<br/>règles, scores, alertes"]
+  end
+  subgraph N["Communication (commun)"]
+    NO["notification-service"]
+  end
+
+  EX -- "REST: GET /groups/{id}/members" --> AC
+  WA -- "REST: GET /users/{id}/kyc-status" --> AC
+  SE -- "REST: POST /transfers" --> WA
+  RE -- "REST: POST /expenses" --> EX
+  SA -- "REST: POST /transfers (arrondi)" --> WA
+  FR -- "REST: GET /users/{id}" --> AC
+  NO -- "REST: GET /users/{id}/contact" --> AC
+  AC -- "REST: GET /wallets/by-user/{id}" --> WA

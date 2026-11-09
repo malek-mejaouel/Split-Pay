@@ -1,0 +1,32 @@
+classDiagram
+  class SavingsAccount {
+    UUID id
+    UUID userId
+    BigDecimal balance
+    boolean roundUpEnabled
+    BigDecimal roundUpStep
+  }
+  class SavingsGoal {
+    UUID id
+    String name
+    BigDecimal targetAmount
+    BigDecimal savedAmount
+    LocalDate deadline
+    GoalStatus status
+  }
+  class RoundUp {
+    UUID id
+    String sourceEventId
+    BigDecimal sourceAmount
+    BigDecimal roundedAmount
+    Instant createdAt
+  }
+  class GoalStatus {
+    <<enumeration>>
+    IN_PROGRESS
+    REACHED
+    CANCELLED
+  }
+  SavingsAccount "1" --> "*" SavingsGoal
+  SavingsAccount "1" --> "*" RoundUp
+  SavingsGoal --> GoalStatus

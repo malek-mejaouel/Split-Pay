@@ -1,0 +1,23 @@
+sequenceDiagram
+  participant WA as wallet-service
+  participant MQ as RabbitMQ
+  participant FR as fraud-service
+  participant RD as Redis
+  participant AC as account-service
+  participant NO as notification-service
+  actor AD as Administrateur (Angular)
+  AD->>FR: GET /api/fraud/alerts/stream (SSE, JWT admin)
+  WA--)MQ: publie wallet.debited
+  MQ--)FR: consomme
+  FR->>RD: ZADD + ZCOUNT fenêtre 5 min (vélocité)
+  FR->>AC: GET /api/users/{id} (ancienneté, KYC)
+  FR->>FR: score = Σ poids des règles déclenchées
+  alt score ≥ 70
+    FR->>FR: crée FraudAlert (OPEN)
+    FR-->>AD: événement SSE "alert"
+    FR--)MQ: publie fraud.alert-raised
+    MQ--)WA: consomme → portefeuille FROZEN
+    MQ--)NO: notifie l'utilisateur et l'admin
+  else score < 70
+    FR->>FR: met à jour RiskProfile seulement
+  end

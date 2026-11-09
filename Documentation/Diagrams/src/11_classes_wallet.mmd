@@ -1,0 +1,44 @@
+classDiagram
+  class Wallet {
+    UUID id
+    UUID userId
+    BigDecimal balance
+    String currency
+    WalletStatus status
+    BigDecimal dailyLimit
+    long version
+  }
+  class WalletTransaction {
+    UUID id
+    TxType type
+    BigDecimal amount
+    TxStatus status
+    UUID counterpartWalletId
+    String idempotencyKey
+    String reference
+    Instant createdAt
+  }
+  class PaymentMethod {
+    UUID id
+    String token
+    String brand
+    String last4
+    BigDecimal maxPerPayment
+  }
+  class TxType {
+    <<enumeration>>
+    TOPUP
+    TRANSFER_IN
+    TRANSFER_OUT
+    PURCHASE
+    ROUNDUP
+  }
+  class WalletStatus {
+    <<enumeration>>
+    ACTIVE
+    FROZEN
+  }
+  Wallet "1" --> "*" WalletTransaction
+  Wallet "1" --> "*" PaymentMethod
+  Wallet --> WalletStatus
+  WalletTransaction --> TxType

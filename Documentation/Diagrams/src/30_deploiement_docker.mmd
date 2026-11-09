@@ -1,0 +1,24 @@
+flowchart TB
+  subgraph HOST["Machine hôte / docker compose"]
+    subgraph INFRA["Infrastructure"]
+      KC["keycloak + keycloak_db"]
+      MQ["rabbitmq"]
+      RD["redis"]
+      MH["mailhog (SMTP de dev)"]
+      EU["eureka-server"]
+      CFG["config-server"]
+      GW["api-gateway"]
+    end
+    subgraph APPS["Applications"]
+      NG["frontend (nginx + Angular)"]
+      S1["account-service + account_db"]
+      S2["wallet-service + wallet_db"]
+      S3["expense-service + expense_db (MongoDB)"]
+      S4["settlement-service + settlement_db"]
+      S5["recurring-service + recurring_db"]
+      S6["savings-service + savings_db"]
+      S7["fraud-service + fraud_db"]
+      S8["notification-service + notification_db"]
+    end
+  end
+  NG --> GW
