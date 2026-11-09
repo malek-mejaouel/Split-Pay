@@ -7,12 +7,12 @@ SplitPay est une application pour les étudiants en colocation ou en sortie de g
 ## 👥 Équipe
 | Membre | Nom | Microservice |
 |---|---|---|
-| Membre 1 | *à compléter* | account-service |
-| Membre 2 | *à compléter* | wallet-service |
-| Membre 3 | *à compléter* | expense-service |
-| Membre 4 | *à compléter* | settlement-service |
-| Membre 5 | *à compléter* | recurring-service + pilote de fraud-service |
-| Membre 6 | *à compléter* | savings-service + co-développeur de fraud-service |
+| Membre 1 | Malek Mejaouel | account-service |
+| Membre 2 | Zeineb Sghaier | wallet-service |
+| Membre 3 | Chahed Smichi | expense-service |
+| Membre 4 | Youssef Othman | settlement-service |
+| Membre 5 | Farah Hanechi | recurring-service + pilote de fraud-service |
+| Membre 6 | Emna Ben Bader | savings-service + co-développeur de fraud-service |
 | Tous | | notification-service (commun) |
 
 Encadrant : *à compléter* (ajouté comme collaborateur)
