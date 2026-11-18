@@ -1,0 +1,108 @@
+<div class="app">
+  <aside class="sidebar">
+    <button class="brand" type="button" routerLink="/dashboard">
+      <span class="brand-mark"><i></i><i></i></span>
+      <span>SplitPay</span>
+    </button>
+
+    <nav>
+      <p>OVERVIEW</p>
+      @for (item of overview; track item.path) {
+        <button type="button" [routerLink]="item.path" routerLinkActive="active">
+          <app-icon [name]="item.icon" />
+          <span>{{ item.label }}</span>
+          @if (item.badge) {
+            <b appBadge>{{ item.badge }}</b>
+          }
+        </button>
+      }
+
+      <p>ACCOUNT</p>
+      @for (item of account; track item.path) {
+        <button type="button" [routerLink]="item.path" routerLinkActive="active">
+          <app-icon [name]="item.icon" />
+          <span>{{ item.label }}</span>
+          @if (item.path === '/notifications' && notifications.hasUnread()) {
+            <i class="unread"></i>
+          }
+        </button>
+      }
+    </nav>
+
+    <section class="card sidebar-save">
+      <div class="mini-spark">&#10022;</div>
+      <strong>Round-ups are on</strong>
+      <span>$34.60 saved this month</span>
+      <button type="button" routerLink="/savings">
+        View savings <app-icon name="chevron" [size]="14" />
+      </button>
+    </section>
+
+    <button class="user-mini" type="button" routerLink="/profile">
+      <app-avatar initials="MP" [status]="true" />
+      <span>
+        <strong>{{ displayName() }}</strong>
+        <small>{{ email() }}</small>
+      </span>
+      <app-icon name="more" />
+    </button>
+  </aside>
+
+  <div class="page-wrap">
+    <header class="topbar">
+      <button class="mobile-brand" type="button" routerLink="/dashboard">
+        <span class="brand-mark"><i></i><i></i></span>
+        SplitPay
+      </button>
+
+      <div class="search">
+        <app-icon name="search" [size]="18" />
+        <span>Search anything...</span>
+        <kbd>&#8984; K</kbd>
+      </div>
+
+      <div class="top-actions">
+        <button
+          class="icon-button"
+          type="button"
+          (click)="theme.toggle()"
+          aria-label="Toggle dark mode"
+        >
+          <app-icon [name]="theme.isDark() ? 'sun' : 'moon'" />
+        </button>
+        <button
+          class="icon-button notification-button"
+          type="button"
+          routerLink="/notifications"
+          aria-label="Notifications"
+        >
+          <app-icon name="bell" />
+          @if (notifications.hasUnread()) {
+            <i></i>
+          }
+        </button>
+        <app-avatar initials="MP" size="sm" />
+      </div>
+    </header>
+
+    <main>
+      <router-outlet />
+    </main>
+  </div>
+
+  <nav class="bottom-nav">
+    @for (item of bottomNav; track item.path) {
+      <button type="button" [routerLink]="item.path" routerLinkActive="active">
+        <app-icon [name]="item.icon" />
+        <span>{{ item.label }}</span>
+      </button>
+    }
+  </nav>
+</div>
+
+@if (modals.expenseOpen()) {
+  <app-expense-modal />
+}
+@if (modals.settleOpen()) {
+  <app-settle-modal />
+}

@@ -1,0 +1,86 @@
+/* ============================================================================
+   SplitPay design tokens
+   ----------------------------------------------------------------------------
+   Single source of truth for colors, typography, radii, shadows and spacing.
+   All feature/page styles reference these CSS custom properties, so switching
+   light/dark mode only requires flipping `data-theme` on the <html> element.
+
+   Values are taken 1:1 from the original Figma/Tailwind design (index.css) to
+   guarantee the visual result stays identical.
+   ========================================================================== */
+
+:root {
+  /* ---- Brand / semantic colors ---- */
+  --primary: #6c4bff;
+  --primary-2: #8a70ff;
+  --primary-soft: #eeeaff;
+
+  --coral: #ff6b65;
+  --coral-soft: #fff0ee;
+
+  --green: #18ae74;
+  --green-soft: #e9f9f2;
+
+  --amber: #f3ae28;
+  --amber-soft: #fff6dc;
+  --amber-ink: #a46c00;
+
+  /* ---- Surfaces & text ---- */
+  --ink: #171622;
+  --muted: #787583;
+  --line: #eae8ef;
+  --bg: #f7f7fa;
+  --surface: #fff;
+  --surface-2: #f2f1f6;
+
+  /* ---- Elevation ---- */
+  --shadow: 0 8px 30px rgba(40, 34, 70, 0.06);
+  --shadow-primary: 0 7px 16px rgba(108, 75, 255, 0.2);
+  --shadow-primary-lg: 0 6px 12px rgba(108, 75, 255, 0.25);
+
+  /* ---- Radius ---- */
+  --r: 22px;
+  --r-sm: 9px;
+  --r-md: 12px;
+  --r-lg: 13px;
+  --r-pill: 20px;
+
+  /* ---- Typography ---- */
+  --font-sans: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --fs-body: 14px;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 800;
+
+  /* ---- Spacing scale (8px system) ---- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+
+  /* ---- Avatars ---- */
+  --avatar-lavender: #c9bfff;
+  --avatar-mint: #95e5c4;
+  --avatar-coral: #ffb0a8;
+  --avatar-blue: #a8d8ff;
+}
+
+:root[data-theme="dark"] {
+  --ink: #f7f5ff;
+  --muted: #aaa6b8;
+  --line: #34313e;
+  --bg: #15141b;
+  --surface: #211f29;
+  --surface-2: #2a2733;
+  --primary-soft: #37304e;
+  --green-soft: #18382c;
+  --coral-soft: #422825;
+  --amber-soft: #41371f;
+  --shadow: 0 10px 35px rgba(0, 0, 0, 0.22);
+}

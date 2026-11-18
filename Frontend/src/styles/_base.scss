@@ -1,0 +1,78 @@
+/* ============================================================================
+   Base / reset
+   ----------------------------------------------------------------------------
+   Ported from the original `@layer base` block. Tailwind's preflight is no
+   longer present, so the element defaults it used to provide are declared
+   explicitly here.
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background 0.25s,
+    color 0.25s;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* Form controls inherit typography (was provided by Tailwind preflight). */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary) 28%, transparent);
+  outline-offset: 2px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ----------------------------------------------------------------------------
+   Angular host elements
+   ----------------------------------------------------------------------------
+   Custom elements are `display: inline` by default, which would break the
+   flex/grid layouts ported from the design. The two rules below restore the
+   expected box for the routed pages and the icon wrapper.
+   -------------------------------------------------------------------------- */
+
+router-outlet + * {
+  display: block;
+}
+
+app-icon {
+  display: inline-flex;
+}

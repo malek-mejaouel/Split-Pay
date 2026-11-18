@@ -1,0 +1,13 @@
+/node_modules
+/dist
+/out-tsc
+/.angular
+/bazel-out
+npm-debug.log
+yarn-error.log
+.idea/
+.project
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db

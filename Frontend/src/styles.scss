@@ -1,0 +1,19 @@
+/* ============================================================================
+   SplitPay – global stylesheet
+   ----------------------------------------------------------------------------
+   Order matters:
+     1. variables  -> design tokens (light + dark)
+     2. base       -> reset / element defaults
+     3. shell-components -> app shell + shared UI primitives + dashboard
+     4. pages      -> one block per feature page
+     5. overlays   -> modals, toasts and responsive breakpoints
+
+   The component class names are intentionally identical to the Figma/React
+   export so the rendered result is unchanged.
+   ========================================================================== */
+
+@use "./styles/variables";
+@use "./styles/base";
+@use "./styles/shell-components";
+@use "./styles/pages";
+@use "./styles/overlays";
